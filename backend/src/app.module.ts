@@ -8,6 +8,7 @@ import { pinoHttpOptions } from './logger/pino.http.options';
 import { LoggerModule } from 'nestjs-pino';
 import { GraphQLResponsePlugin } from './logger/plugins/graphql-response.plugin';
 import { EmailAccountModule } from './email-account/email-account.module';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { EmailAccountModule } from './email-account/email-account.module';
         res,
       }),
     }),
+    PrismaModule,
     EmailAccountModule,
   ],
   controllers: [],
