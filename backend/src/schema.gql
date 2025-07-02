@@ -25,6 +25,35 @@ input CreateEmailAccountInput {
   surname: String
 }
 
+input CreateSteamAccountInput {
+  """Внешний ключ на почту"""
+  email_uuid: String!
+
+  """Есть ли бан на аккаунте (КТ/VAC)"""
+  isBanned: Boolean!
+
+  """Логин стим"""
+  login: String!
+
+  """maFile"""
+  maFile: JSONObject
+
+  """Пароль от стима"""
+  password: String!
+
+  """Номер телефона"""
+  phone_number: String
+
+  """Код восстановления"""
+  r_code: String
+
+  """Снят ли лимит в 5$ с аккаунта"""
+  restriction_5dollar_removed: Boolean!
+
+  """Номер телефона"""
+  steam_id64: String
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -50,14 +79,33 @@ scalar JSONObject
 
 type Mutation {
   createEmailAccount(createEmailInput: CreateEmailAccountInput!): EmailAccount!
+  createSteamAccount(createSteamAccountInput: CreateSteamAccountInput!): SteamAccount!
   deleteEmailAccount(uuid: String!): EmailAccount!
+  removeSteamAccount(uuid: String!): SteamAccount!
   updateEmailAccount(updateEmailInput: UpdateEmailAccountInput!): EmailAccount!
+  updateSteamAccount(updateSteamAccountInput: UpdateSteamAccountInput!): SteamAccount!
 }
 
 type Query {
   emailAccount(uuid: String!): EmailAccount!
   emailAccounts: [EmailAccount!]!
   health: String!
+  steamAccount(uuid: String!): SteamAccount!
+}
+
+type SteamAccount {
+  created_at: DateTime!
+  email_uuid: String!
+  isBanned: Boolean!
+  login: String!
+  maFile: JSONObject
+  password: String!
+  phone_number: String
+  r_code: String
+  restriction_5dollar_removed: Boolean!
+  steam_id64: String
+  updated_at: DateTime!
+  uuid: ID!
 }
 
 input UpdateEmailAccountInput {
@@ -81,5 +129,35 @@ input UpdateEmailAccountInput {
 
   """Фамилия в профиле почты"""
   surname: String
+  uuid: String!
+}
+
+input UpdateSteamAccountInput {
+  """Внешний ключ на почту"""
+  email_uuid: String
+
+  """Есть ли бан на аккаунте (КТ/VAC)"""
+  isBanned: Boolean
+
+  """Логин стим"""
+  login: String
+
+  """maFile"""
+  maFile: JSONObject
+
+  """Пароль от стима"""
+  password: String
+
+  """Номер телефона"""
+  phone_number: String
+
+  """Код восстановления"""
+  r_code: String
+
+  """Снят ли лимит в 5$ с аккаунта"""
+  restriction_5dollar_removed: Boolean
+
+  """Номер телефона"""
+  steam_id64: String
   uuid: String!
 }
