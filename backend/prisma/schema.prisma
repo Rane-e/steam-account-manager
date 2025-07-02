@@ -6,3 +6,16 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model EmailAccount {
+  uuid          String        @id @default(uuid())
+  email         String        @unique
+  password      String
+  name          String
+  surname       String?
+  phone_number  String?
+  reserve_email String?
+  other_data    Json?
+  updated_at    DateTime      @updatedAt
+  created_at    DateTime      @default(now())
+}
