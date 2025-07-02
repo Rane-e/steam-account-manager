@@ -7,6 +7,7 @@ import { AppResolver } from './app.resolver';
 import { pinoHttpOptions } from './logger/pino.http.options';
 import { LoggerModule } from 'nestjs-pino';
 import { GraphQLResponsePlugin } from './logger/plugins/graphql-response.plugin';
+import { EmailAccountModule } from './email-account/email-account.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { GraphQLResponsePlugin } from './logger/plugins/graphql-response.plugin'
         res,
       }),
     }),
+    EmailAccountModule,
   ],
   controllers: [],
   providers: [AppResolver],
