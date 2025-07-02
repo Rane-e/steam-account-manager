@@ -9,7 +9,10 @@ export class SteamAccountResolver {
   constructor(private readonly steamAccountService: SteamAccountService) {}
 
   @Mutation(() => SteamAccount)
-  createSteamAccount(@Args('createSteamAccountInput') createSteamAccountInput: CreateSteamAccountInput) {
+  createSteamAccount(
+    @Args('createSteamAccountInput')
+    createSteamAccountInput: CreateSteamAccountInput,
+  ) {
     return this.steamAccountService.create(createSteamAccountInput);
   }
 
@@ -19,17 +22,23 @@ export class SteamAccountResolver {
   }
 
   @Query(() => SteamAccount, { name: 'steamAccount' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.steamAccountService.findOne(id);
+  findOne(@Args('uuid', { type: () => String }) uuid: string) {
+    return this.steamAccountService.findOne(uuid);
   }
 
   @Mutation(() => SteamAccount)
-  updateSteamAccount(@Args('updateSteamAccountInput') updateSteamAccountInput: UpdateSteamAccountInput) {
-    return this.steamAccountService.update(updateSteamAccountInput.id, updateSteamAccountInput);
+  updateSteamAccount(
+    @Args('updateSteamAccountInput')
+    updateSteamAccountInput: UpdateSteamAccountInput,
+  ) {
+    return this.steamAccountService.update(
+      updateSteamAccountInput.uuid,
+      updateSteamAccountInput,
+    );
   }
 
   @Mutation(() => SteamAccount)
-  removeSteamAccount(@Args('id', { type: () => Int }) id: number) {
-    return this.steamAccountService.remove(id);
+  removeSteamAccount(@Args('uuid', { type: () => String }) uuid: string) {
+    return this.steamAccountService.remove(uuid);
   }
 }

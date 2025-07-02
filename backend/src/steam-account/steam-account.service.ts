@@ -1,26 +1,30 @@
 import { Injectable } from '@nestjs/common';
 import { CreateSteamAccountInput } from './dto/create-steam-account.input';
 import { UpdateSteamAccountInput } from './dto/update-steam-account.input';
+import { PrismaService } from 'src/prisma/prisma.service';
 
 @Injectable()
 export class SteamAccountService {
+  constructor(private readonly prisma: PrismaService) {}
+
   create(createSteamAccountInput: CreateSteamAccountInput) {
-    return 'This action adds a new steamAccount';
+    return this.prisma.steamAccount.create({ data: createSteamAccountInput });
   }
 
   findAll() {
-    return `This action returns all steamAccount`;
+    return this.prisma.steamAccount.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} steamAccount`;
+  findOne(uuid: string) {
+    return this.prisma.steamAccount.findUnique({ where: { uuid } });
   }
 
-  update(id: number, updateSteamAccountInput: UpdateSteamAccountInput) {
-    return `This action updates a #${id} steamAccount`;
+  update(uuid: string, updateSteamAccountInput: UpdateSteamAccountInput) {
+    const { uuid: _omit, ...data } = updateSteamAccountInput;
+    return this.prisma.steamAccount.update({ where: { uuid }, data });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} steamAccount`;
+  remove(uuid: string) {
+    return this.prisma.steamAccount.delete({ where: { uuid } });
   }
 }
