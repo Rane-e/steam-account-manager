@@ -1,6 +1,6 @@
-import { InputType, Int, Field } from '@nestjs/graphql';
+import { InputType, Int, Field, GraphQLISODateTime } from '@nestjs/graphql';
 import { Prisma } from '@prisma/client';
-import { IsOptional, IsString, Length } from 'class-validator';
+import { IsISO8601, IsOptional, IsString, Length } from 'class-validator';
 import { GraphQLJSONObject } from 'graphql-type-json';
 
 @InputType()
@@ -16,6 +16,10 @@ export class CreateSteamAccountInput {
 
   @Field(() => String, { description: 'Номер телефона', nullable: true })
   phone_number?: string;
+
+  @Field(() => GraphQLISODateTime, { description: 'Дата регистрации аккаунта' })
+  @IsISO8601()
+  registration_date: Date;
 
   @Field(() => Boolean, { description: 'Снят ли лимит в 5$ с аккаунта' })
   restriction_5dollar_removed: boolean;

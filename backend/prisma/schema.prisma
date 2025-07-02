@@ -8,17 +8,19 @@ datasource db {
 }
 
 model EmailAccount {
-  uuid          String        @id @default(uuid())
-  email         String        @unique
-  password      String
-  name          String
-  surname       String?
-  phone_number  String?
-  reserve_email String?
-  other_data    Json?
-  updated_at    DateTime      @updatedAt
-  created_at    DateTime      @default(now())
-  SteamAccount  SteamAccount?
+  uuid              String        @id @default(uuid())
+  email             String        @unique
+  password          String
+  name              String
+  surname           String?
+  birthday          DateTime
+  registration_date DateTime
+  phone_number      String?
+  reserve_email     String?
+  other_data        Json?
+  updated_at        DateTime      @updatedAt
+  created_at        DateTime      @default(now())
+  SteamAccount      SteamAccount?
 }
 
 model SteamAccount {
@@ -27,6 +29,7 @@ model SteamAccount {
   login                       String       @unique
   password                    String
   phone_number                String?
+  registration_date           DateTime
   restriction_5dollar_removed Boolean
   steam_id64                  String?
   r_code                      String?

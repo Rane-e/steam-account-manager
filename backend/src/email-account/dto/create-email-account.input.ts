@@ -1,5 +1,5 @@
-import { InputType, Field } from '@nestjs/graphql';
-import { IsEmail, IsOptional, IsString, Length } from 'class-validator';
+import { InputType, Field, GraphQLISODateTime } from '@nestjs/graphql';
+import { IsEmail, IsISO8601, IsOptional } from 'class-validator';
 import { GraphQLJSONObject } from 'graphql-type-json';
 import { Prisma } from '@prisma/client';
 
@@ -20,6 +20,14 @@ export class CreateEmailAccountInput {
     nullable: true,
   })
   surname?: string;
+
+  @Field(() => GraphQLISODateTime, { description: 'Дата дня рождения' })
+  @IsISO8601()
+  birthday: Date;
+
+  @Field(() => GraphQLISODateTime, { description: 'Дата регистрации почты' })
+  @IsISO8601()
+  registration_date: Date;
 
   @Field(() => String, { description: 'Номер телефона', nullable: true })
   phone_number?: string;
