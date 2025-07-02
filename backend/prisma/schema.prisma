@@ -18,4 +18,21 @@ model EmailAccount {
   other_data    Json?
   updated_at    DateTime      @updatedAt
   created_at    DateTime      @default(now())
+  SteamAccount  SteamAccount?
+}
+
+model SteamAccount {
+  uuid                        String       @id @default(uuid())
+  email_uuid                  String       @unique
+  login                       String       @unique
+  password                    String
+  phone_number                String?
+  restriction_5dollar_removed Boolean
+  steam_id64                  String?
+  r_code                      String?
+  maFile                      Json?
+  isBanned                    Boolean
+  created_at                  DateTime     @default(now())
+  updated_at                  DateTime     @updatedAt
+  emailAccount                EmailAccount @relation(fields: [email_uuid], references: [uuid])
 }

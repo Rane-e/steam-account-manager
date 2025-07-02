@@ -9,6 +9,7 @@ import { LoggerModule } from 'nestjs-pino';
 import { GraphQLResponsePlugin } from './logger/plugins/graphql-response.plugin';
 import { EmailAccountModule } from './email-account/email-account.module';
 import { PrismaModule } from './prisma/prisma.module';
+import { SteamAccountModule } from './steam-account/steam-account.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { PrismaModule } from './prisma/prisma.module';
     }),
     PrismaModule,
     EmailAccountModule,
+    SteamAccountModule,
   ],
   controllers: [],
   providers: [AppResolver],
