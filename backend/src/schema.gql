@@ -2,6 +2,84 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+input CreateEmailAccountInput {
+  """Адрес электронной почты"""
+  email: String!
+
+  """Имя в профиле почты"""
+  name: String!
+
+  """Другие данные"""
+  other_data: JSONObject
+
+  """Пароль от электронной почты"""
+  password: String!
+
+  """Номер телефона"""
+  phone_number: String
+
+  """Резервная почта"""
+  reserve_email: String
+
+  """Фамилия в профиле почты"""
+  surname: String
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type EmailAccount {
+  created_at: DateTime!
+  email: String!
+  name: String!
+  other_data: JSONObject
+  password: String!
+  phone_number: String!
+  reserve_email: String!
+  surname: String!
+  updated_at: DateTime!
+  uuid: ID!
+}
+
+"""
+The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSONObject
+
+type Mutation {
+  createEmailAccount(createEmailInput: CreateEmailAccountInput!): EmailAccount!
+  deleteEmailAccount(uuid: String!): EmailAccount!
+  updateEmailAccount(updateEmailInput: UpdateEmailAccountInput!): EmailAccount!
+}
+
 type Query {
+  emailAccount(uuid: String!): EmailAccount!
+  emailAccounts: [EmailAccount!]!
   health: String!
+}
+
+input UpdateEmailAccountInput {
+  """Адрес электронной почты"""
+  email: String
+
+  """Имя в профиле почты"""
+  name: String
+
+  """Другие данные"""
+  other_data: JSONObject
+
+  """Пароль от электронной почты"""
+  password: String
+
+  """Номер телефона"""
+  phone_number: String
+
+  """Резервная почта"""
+  reserve_email: String
+
+  """Фамилия в профиле почты"""
+  surname: String
+  uuid: String!
 }
