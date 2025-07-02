@@ -20,6 +20,9 @@ export class SteamAccount {
   phone_number?: string;
 
   @Field()
+  registration_date: Date;
+
+  @Field()
   restriction_5dollar_removed: boolean;
 
   @Field({ nullable: true })

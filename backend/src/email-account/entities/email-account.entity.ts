@@ -20,6 +20,12 @@ export class EmailAccount {
   surname: string;
 
   @Field()
+  birthday: Date;
+
+  @Field()
+  registration_date: Date;
+
+  @Field()
   phone_number: string;
 
   @Field()

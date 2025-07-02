@@ -29,6 +29,7 @@ model SteamAccount {
   login                       String       @unique
   password                    String
   phone_number                String?
+  registration_date           DateTime
   restriction_5dollar_removed Boolean
   steam_id64                  String?
   r_code                      String?
